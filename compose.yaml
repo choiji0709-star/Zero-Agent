@@ -1,0 +1,19 @@
+services:
+  zero-agent:
+    build: .
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${ZERO_AGENT_BIND_ADDRESS:-127.0.0.1}:${ZERO_AGENT_PORT:-3000}:3000"
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3000"
+      DATA_DIR: /app/data
+      RESEARCH_API_KEY: ${RESEARCH_API_KEY:-}
+      RESEARCH_MODEL: ${RESEARCH_MODEL:-gpt-4.1-mini}
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:-}
+      DASHBOARD_AUTH_REQUIRED: ${DASHBOARD_AUTH_REQUIRED:-0}
+    volumes:
+      - zero-agent-data:/app/data
+volumes:
+  zero-agent-data:

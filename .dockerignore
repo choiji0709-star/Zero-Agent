@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+.data
+node_modules
+dist
+*.log
+README.md
+AGENTS.md
+compose.yaml
+render.yaml

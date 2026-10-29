@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: zero-agent
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /app/data
+      - key: DASHBOARD_AUTH_REQUIRED
+        value: "1"
+      - key: DASHBOARD_PASSWORD
+        generateValue: true
+      - key: DEPLOYMENT_NOTE
+        value: "무료 배포 환경: 비활성 시 서버가 중지될 수 있으며, 재시작하면 모의 계좌 기록이 초기화될 수 있습니다."
