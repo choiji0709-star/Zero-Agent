@@ -2,6 +2,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createApp } from "../server/index.js";
 
+// These HTTP integration tests must not call a paid API with inherited VM keys.
+delete process.env.RESEARCH_API_KEY;
+delete process.env.OPENAI_API_KEY;
+
 test("public deployment requires a password when authentication is required", async () => {
   await assert.rejects(
     createApp({ dbFile: ":memory:", password: "", authRequired: true }),
